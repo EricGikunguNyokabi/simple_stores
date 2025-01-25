@@ -47,7 +47,7 @@
             <!-- Place login and register buttons after the search button -->
              
             {% if current_user.is_authenticated %}
-                <span class="navbar-text me-2"><span style="font-weight: 900;">{{ current_user.email }}</span></span>
+                <span class="navbar-text me-2"><span style="font-weight: 900; padding-left: 10px;">{{ current_user.first_name or current_user.email }}</span></span>
                 <a class="btn btn-outline-danger logout-btn ms-2" href="{{ url_for('user.user_profile') }}">User-Profile</a>
                 <a class="btn btn-outline-danger logout-btn ms-2" href="{{ url_for('auth.logout') }}">Logout</a>
             {% else %}

@@ -1,2 +1,80 @@
 {% extends 'layout.html' %}
+
 {% block main %}
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 text-primary">User Profile</h1>
+        <p class="text-muted">Manage your account details, email, phone, and address settings.</p>
+    </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert-container">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Profile Form -->
+    <form action="{{ url_for('user.user_profile') }}" method="post" class="card p-4 shadow-sm mb-5">
+        {{ form.hidden_tag() }}
+        <h3 class="mb-4 text-secondary">Account Details</h3>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="first_name">First Name</label>
+                {{ form.first_name(class="form-control", id="first_name", placeholder="First Name") }}
+            </div>
+            <div class="form-group col-md-6">
+                <label for="last_name">Last Name</label>
+                {{ form.last_name(class="form-control", id="last_name", placeholder="Last Name") }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            {{ form.email(class="form-control", id="email", placeholder="Email Address") }}
+        </div>
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary px-4">Update Profile</button>
+        </div>
+    </form>
+
+    <!-- Action Cards -->
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Email Verification</h5>
+                    <p class="card-text">Ensure your email is verified for full access.</p>
+                    <a href="{{ url_for('user.verify_email') }}" class="btn btn-info px-4">Verify Email</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Phone Verification</h5>
+                    <p class="card-text">Verify your phone number for better account security.</p>
+                    <a href="{{ url_for('user.verify_phone') }}" class="btn btn-info px-4">Verify Phone</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Edit Address</h5>
+                    <p class="card-text">Keep your delivery details up to date.</p>
+                    <a href="{{ url_for('user.edit_address') }}" class="btn btn-warning px-4">Edit Address</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
