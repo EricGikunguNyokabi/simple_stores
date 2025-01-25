@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+{% block main %}
+<div class="container py-5">
+    like glovo
+</div>
+
+
+
+<div class="container py-5">
+    <h2 class="mb-4">Our Products</h2>
+    <div class="row row-cols-2 row-cols-md-4 g-3">
+        {% for product in products %}
+        <div class="col">
+            <div class="card h-100">
+                <img 
+                    src="{{ product.product_image_path }}" 
+                    class="card-img-top" 
+                    alt="{{ product.product_name }}"
+                    style="height: 200px; object-fit: contain;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.product_name }}</h5>
+                    <p class="card-text text-truncate">
+                        {{ product.product_description }}
+                    </p>
+                    <p class="card-text">
+                        <strong>Price:</strong> KES {{ product.price }}
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <a href="#" class="btn btn-outline-primary">View More</a>
+                        <button 
+                            class="btn btn-primary add-to-cart" 
+                            data-product-id="{{ product.product_id }}" 
+                            data-action="increment">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default button action
+
+                const productId = this.getAttribute('data-product-id');
+                const action = this.getAttribute('data-action');
+
+                // Make the POST request to update the cart
+                fetch('/cart/shopping-cart', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        product_id: productId,
+                        action: action
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log(data.message || "Item added to the cart!");
+                        location.reload(); // Reload page to reflect changes
+                    } else {
+                        alert(data.message || "Failed to update cart.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred while updating the cart.");
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}
