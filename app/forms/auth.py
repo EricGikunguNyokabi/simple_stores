@@ -5,13 +5,7 @@ from wtforms.validators import DataRequired, Email, Length, EqualTo
 
 class RegistrationForm(FlaskForm):
 
-    email = StringField("Email",
-                        validators=[
-                            DataRequired(),
-                            Email(message="Invalid email format"),
-                            Length(max=255),
-                        ],
-                        )
+    email = StringField("Email",validators=[DataRequired(),Email(message="Invalid email format"),Length(max=255),],)
     phone = StringField("Phone",
                         validators=[
                             DataRequired(),
@@ -19,12 +13,7 @@ class RegistrationForm(FlaskForm):
                         ]
                     )
     
-    password = PasswordField("Password",
-                             validators=[
-                                 DataRequired(),
-                                 Length(min=4, message="Password must be at least 4 characters long")
-                             ],
-                             )
+    password = PasswordField("Password",validators=[DataRequired(),Length(min=4, message="Password must be at least 4 characters long")],)
     confirm_password = PasswordField("Confirm Password",  # Changed to consistent naming
                                      validators=[
                                          DataRequired(),

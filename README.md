@@ -1,3 +1,24 @@
+# TJ DINEHIVE 🍔🍕🥗  
+
+Welcome to **TJ DINEHIVE**, an E-commerce food ordering platform that allows users to browse menus, place orders, and enjoy delicious meals from various restaurants. Built using modern web technologies, this platform ensures a seamless online food ordering experience.  
+
+## **Screenshots & Features**  
+
+### **1. Home Page (Landing Page)**
+![TJ DINEHIVE](app/static/images/home.png)  
+- A welcoming homepage showcasing featured meals and restaurant partners.  
+- Easy navigation to browse categories, view popular dishes, and start ordering.  
+
+---
+
+## **How to Run TJ DINEHIVE Locally**  
+
+### **1. Clone the Repository**  
+```sh
+git clone https://github.com/your-repository/tj-dinehive.git
+cd tj-dinehive
+
+
 # Link for creating thirdparty email app(password)
     https://myaccount.google.com/apppasswords 
 
